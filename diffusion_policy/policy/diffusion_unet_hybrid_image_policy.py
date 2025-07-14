@@ -291,7 +291,7 @@ class DiffusionUnetHybridImagePolicy(BaseImagePolicy):
 
         # handle different ways of passing observation
         local_cond = None
-        global_cond = None
+        global_cond = None # torch.Size([N, 132]) -> observation handled as "global"
         trajectory = nactions
         cond_data = trajectory
         if self.obs_as_global_cond:
@@ -330,7 +330,7 @@ class DiffusionUnetHybridImagePolicy(BaseImagePolicy):
         loss_mask = ~condition_mask
 
         # apply conditioning
-        noisy_trajectory[condition_mask] = cond_data[condition_mask]
+        noisy_trajectory[condition_mask] = cond_data[condition_mask] # torch.Size([N, 16, 2])
         
         # Predict the noise residual
         pred = self.model(noisy_trajectory, timesteps, 

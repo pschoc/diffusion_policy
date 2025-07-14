@@ -8,8 +8,8 @@ checkpoint:
     mode: max
     monitor_key: test_mean_score
 dataloader:
-  batch_size: 64
-  num_workers: 8
+  batch_size: 32
+  num_workers: 1
   persistent_workers: false
   pin_memory: true
   shuffle: true
@@ -30,7 +30,7 @@ logging:
   mode: online
   name: 2023.01.16-20.20.06_train_diffusion_unet_hybrid_pusht_image
   project: diffusion_policy_debug
-  resume: true
+  resume: false
   tags:
   - train_diffusion_unet_hybrid
   - pusht_image
@@ -61,8 +61,8 @@ policy:
   diffusion_step_embed_dim: 128
   down_dims:
   - 512
+  - 512
   - 1024
-  - 2048
   eval_fixed_crop: true
   horizon: 16
   kernel_size: 5
@@ -167,16 +167,16 @@ training:
   max_train_steps: null
   max_val_steps: null
   num_epochs: 3050
-  resume: true
+  resume: false
   rollout_every: 50
   sample_every: 5
   seed: 42
   tqdm_interval_sec: 1.0
   use_ema: true
-  val_every: 1
+  val_every: 10
 val_dataloader:
-  batch_size: 64
-  num_workers: 8
+  batch_size: 32
+  num_workers: 1
   persistent_workers: false
   pin_memory: true
   shuffle: false
