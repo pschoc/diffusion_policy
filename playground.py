@@ -28,7 +28,7 @@ global_cond_dim = 132
 diffusion_step_embed_dim = 128
 down_dims = [512, 512, 1024]
 kernel_size = 5
-n_groups = 8
+n_groups = 2
 cond_predict_scale = True
 
 batch_size = 32
@@ -44,7 +44,7 @@ model = HNet(
             cond_predict_scale=cond_predict_scale
         )
 
-trajectory = torch.randn(batch_size, num_waypoints, input_dim) 
+trajectory = torch.randn(batch_size, num_waypoints, input_dim, requires_grad=True) 
 global_cond = torch.randn(batch_size, global_cond_dim)
 
 model_output = model(trajectory, batch_size, local_cond=None, global_cond=global_cond)
